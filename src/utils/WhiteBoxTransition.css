@@ -1,0 +1,16 @@
+.topbg {
+  position: absolute;
+  width: 100%;
+  z-index: 1;
+}
+
+.motionBg {
+  position: relative;
+  background-color: white !important;
+  width: 100%;
+  z-index: 100;
+}
+
+.overflow {
+  /* overflow: hidden; */
+}
