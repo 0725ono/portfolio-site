@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useRef, useState } from "react";
 import { memo } from "react";
 import { motion } from "framer-motion";
 import WhiteBoxTransition from "../../src/utils/WhiteBoxTransition";
@@ -10,17 +10,39 @@ const Contact = memo(() => {
   const [formErrors, setFormErrors] = useState({});
   const [isSubmit, setIsSubmit] = useState(false);
 
+  // 入力内容の取得
+  const nameRef = useRef(null);
+  const emailRef = useRef(null);
+  const messageRef = useRef(null);
+
   const handleChange = (e) => {
-    // console.log(e.target.value);
     const { name, value } = e.target;
     setFormValues({ ...formValues, [name]: value });
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     //ログイン情報を送信+バリデーションチェックをする。
     setFormErrors(validate(formValues));
     setIsSubmit(true);
+
+    // APIを叩きrefで取得したものを送る、まずそのためのデータ格納変数を定義
+    let data = {
+      name: nameRef.current?.value,
+      email: emailRef.current?.value,
+      message: messageRef.current?.value,
+    };
+
+    await fetch("api/contact", {
+      method: "POST",
+      headers: {
+        Accept: "application/json, text/plain",
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(data),
+    }).then((res) => {
+      if (res.status === 200) console.log("メール送信成功");
+    });
   };
 
   const validate = (values) => {
@@ -61,6 +83,7 @@ const Contact = memo(() => {
                   placeholder="お名前"
                   name="username"
                   onChange={(e) => handleChange(e)}
+                  ref={nameRef}
                 />
               </div>
               <p className="errorMsg">{formErrors.username}</p>
@@ -71,6 +94,7 @@ const Contact = memo(() => {
                   placeholder="メールアドレス"
                   name="mailAddress"
                   onChange={(e) => handleChange(e)}
+                  ref={emailRef}
                 />
               </div>
               <p className="errorMsg">{formErrors.mailAddress}</p>
@@ -82,6 +106,7 @@ const Contact = memo(() => {
                   rows={4}
                   cols={50}
                   onChange={(e) => handleChange(e)}
+                  ref={messageRef}
                 />
               </div>
               <p className="errorMsg">{formErrors.message}</p>

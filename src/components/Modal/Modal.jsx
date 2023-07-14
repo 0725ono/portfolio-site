@@ -20,7 +20,7 @@ const worksArray = [
     id: 2,
     name: "SNSアプリ",
     content:
-      "React, MongoDB, Express, Reactを使用したSNSアプリです。Udemyの講座をもとに基本的な機能を作成しました。この講座を通して、CRUD操作や、ユーザー登録の機能、フロントエンドとバックエンドの接続などを学びました。また、各ユーザーのフォロー、フォロワー数を表示したり、いいね機能、ログアウトの機能などを追加実装しました。",
+      "React, MongoDB, Express, Reactを使用したSNSアプリです。Udemyの講座をもとに基本的な機能を作成しました。この講座を通して、CRUD操作や、ユーザー登録の機能、フロントエンドとバックエンドの接続などを学びました。また、ユーザー表示ページ、簡単なユーザー検索機能、各ユーザーのフォロー、フォロワー数の表示、いいね機能、ログアウトの機能を追加実装しました。",
     img: "/img/works/snsapp/snsapp1.png",
     otherImg: [
       "/img/works/snsapp/snsapp1.png",
