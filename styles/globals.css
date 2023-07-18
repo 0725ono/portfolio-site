@@ -92,7 +92,7 @@ nav ul li a:hover {
 
 .homepage-bg {
   margin-top: 120px;
-  background-image: url(../public/img/topbg.jpg);
+  background-image: url("../public/img/topbg.jpg");
   background-size: cover;
   background-repeat: no-repeat;
   margin-left: 5%;
