@@ -56,6 +56,7 @@ const worksArray = [
       "/img/works/marimband/marimband1.png",
       "/img/works/marimband/marimband2.png",
       "/img/works/marimband/marimband3.png",
+      "/img/works/marimband/marimband4.png",
     ],
     lang: "HTML/CSS, Javascript, jQuery",
   },

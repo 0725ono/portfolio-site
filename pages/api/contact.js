@@ -4,6 +4,7 @@ export default function sendGmail(req, res) {
   const transporter = nodemailer.createTransport({
     host: "smtp.gmail.com",
     port: 587,
+    secure: true,
     auth: {
       user: process.env.GMAILUSER,
       pass: process.env.GMAILPASSWORD,

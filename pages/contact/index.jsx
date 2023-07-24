@@ -20,8 +20,37 @@ const Contact = memo(() => {
     setFormValues({ ...formValues, [name]: value });
   };
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
+  // nodemailer用記述
+  // const handleSubmit = async (e) => {
+  //   e.preventDefault();
+  //   //ログイン情報を送信+バリデーションチェックをする。
+  //   setFormErrors(validate(formValues));
+  //   setIsSubmit(true);
+
+  //   // APIを叩きrefで取得したものを送る、まずそのためのデータ格納変数を定義
+  //   let data = {
+  //     name: nameRef.current?.value,
+  //     email: emailRef.current?.value,
+  //     message: messageRef.current?.value,
+  //   };
+
+  //   await fetch("api/contact", {
+  //     method: "POST",
+  //     headers: {
+  //       Accept: "application/json, text/plain",
+  //       "Content-Type": "application/json",
+  //     },
+  //     body: JSON.stringify(data),
+  //   }).then((res) => {
+  //     if (res.status === 200) console.log("メール送信成功");
+  //   });
+  // };
+  // ここまでnodemailerを用いた実装の記述
+
+  // ここからはSendGrid使用時の記述
+  // sendEmailをhandleSubmitへ
+  const handleSubmit = async (event) => {
+    event.preventDefault();
     //ログイン情報を送信+バリデーションチェックをする。
     setFormErrors(validate(formValues));
     setIsSubmit(true);
@@ -32,17 +61,15 @@ const Contact = memo(() => {
       email: emailRef.current?.value,
       message: messageRef.current?.value,
     };
-
-    await fetch("api/contact", {
-      method: "POST",
+    const res = await fetch("api/send", {
+      body: JSON.stringify(data),
       headers: {
-        Accept: "application/json, text/plain",
         "Content-Type": "application/json",
       },
-      body: JSON.stringify(data),
-    }).then((res) => {
-      if (res.status === 200) console.log("メール送信成功");
+      method: "POST",
     });
+
+    // if (res.ok) Router.push('/thank-you');
   };
 
   const validate = (values) => {
