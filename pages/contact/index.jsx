@@ -69,7 +69,7 @@ const Contact = memo(() => {
       method: "POST",
     });
 
-    // if (res.ok) Router.push('/thank-you');
+    const result = await res.json();
   };
 
   const validate = (values) => {
