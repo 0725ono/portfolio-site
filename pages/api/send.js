@@ -1,4 +1,4 @@
-export default function handler(req, res) {
+export default async function handler(req, res) {
   if (req.method === "POST") {
     const sgMail = require("@sendgrid/mail");
     sgMail.setApiKey(process.env.SENDGRILD_API_KEY); //SendGridのAPIキー
@@ -18,17 +18,16 @@ export default function handler(req, res) {
     `,
     };
 
-    (async () => {
-      try {
-        await sgMail.send(toHostMsg);
-      } catch (error) {
-        console.error(error);
-        if (error.response) {
-          console.error(error.response.body);
-        }
+    try {
+      await sgMail.send(toHostMsg);
+      console.log("msg送信成功");
+      res.status(200).json({ message: "メール送信成功" });
+    } catch (error) {
+      console.error(error);
+      if (error.response) {
+        console.error(error.response.body);
       }
-    })();
+      res.status(500).json({ message: "メール送信に失敗しました" });
+    }
   }
-
-  res.status(200).json({ message: "メール送信成功" });
 }
