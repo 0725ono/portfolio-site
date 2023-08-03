@@ -20,7 +20,6 @@ export default async function handler(req, res) {
 
     try {
       await sgMail.send(toHostMsg);
-      console.log("msg送信成功");
       res.status(200).json({ message: "メール送信成功" });
     } catch (error) {
       console.error(error);

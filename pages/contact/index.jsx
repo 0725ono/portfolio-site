@@ -68,7 +68,7 @@ const Contact = memo(() => {
       },
       method: "POST",
     });
-
+    console.log(process.env.NEXT_PUBLIC_SENDGRILD_API_KEY);
     const result = await res.json();
   };
 
